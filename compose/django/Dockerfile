@@ -5,6 +5,9 @@ RUN apt-get update
 RUN mkdir /code
 WORKDIR /code
 
-COPY requirements.txt /code/ #local requirements.txt => docker /code/
-RUN pip install -r requirements.txt
-COPY . /code/ #local => docker /code/
+#local requirements.txt => docker /code/
+COPY requirements.txt /code/
+RUN pip install -r /code/requirements.txt
+
+#local => docker /code/
+COPY . /code/
