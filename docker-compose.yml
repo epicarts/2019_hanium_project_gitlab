@@ -1,0 +1,29 @@
+# Use root/example as user/password credentials
+version: '3.7'
+services:
+
+  #<2019_hanium_project>/compose/Dockerfile
+  django:
+    build:
+      context: .
+      dockerfile: ./compose/django/Dockerfile #local django
+    environment:
+      - DJANGO_DEBUG=True
+      - DJANGO_DB_HOST=db
+      - DJANGO_DB_PORT=3306
+      - DJANGO_DB_NAME=djangodocker_db
+      - DJANGO_DB_USERNAME=root
+      - DJANGO_DB_PASSWORD=root
+      #- DJANGO_SECRET_KEY=dev_secret_key
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/code
+    command:
+      - python manage.py runserver 0.0.0.0:8000
+      #- bash
+      #- -c
+      #- |
+      #  /wait-for-it.sh db:3306 -t 10
+      #  python manage.py migrate
+      #  python manage.py runserver 80:80
