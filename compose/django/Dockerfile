@@ -2,12 +2,12 @@
 FROM python:3.6.5
 
 RUN apt-get update
-RUN mkdir /code
+RUN mkdir /code/
 WORKDIR /code
 
 #local requirements.txt => docker /code/
-COPY requirements.txt /code/
-RUN pip install -r /code/requirements.txt
+ADD . /code
 
-#local => docker /code/
-COPY . /code/
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir -r requirements.txt
+
