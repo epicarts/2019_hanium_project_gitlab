@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'wufom@f%xvy^36wu=uw)z6&%5xfc$2l=oa6*@)hv2*_bc!ba8d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DJANGO_DEBUG')
 
 ALLOWED_HOSTS = ['*']
 
@@ -72,11 +72,18 @@ WSGI_APPLICATION = 'hanium.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
+import os 
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+	'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.getenv('DJANGO_DB_NAME', ''), 
+        'USER': os.getenv('DJANGO_USERNAME', 'root'), 
+        'PASSWORD': os.getenv('DJANGO_DB_PASSWORD','root'),
+        'HOST': os.getenv('DJANGO_DB_HOST','localhost'),
+        'PORT': os.getenv('DJANGO_DB_PORT','3306')
     }
 }
 
