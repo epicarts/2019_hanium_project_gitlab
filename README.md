@@ -18,7 +18,7 @@
 
 #도커 설치 및 적용 문서(Ubuntu)
 적용 환경: ubuntu 16.04 , docker-compose (gunicorn + Django + nginx + mariadb)
-1. '''sudo apt update //업데이트를 먼저 해쥼'''
+1. ```sudo apt update``` //업데이트를 먼저 해쥼
 2. sudo apt install git //깃 사용을 위해 설치
 3. sudo apt install docker.io //도커 설치
 4. sudo apt install curl
