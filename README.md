@@ -28,5 +28,5 @@
 7. ```git clone https://github.com/epicarts/2019_hanium_project``` //git 에서 프로젝트 다운로드
 8. ```cd 2019_hanium_project``` //프로젝트 폴더 이동
 9. ```sudo docker-compose build``` //docker-compose를 사용하여 빌드(오래걸림)
-10. ```sudo docker-compose up``` //docker-compose를 사용하여 시작 (오래걸림)
+10. ```sudo docker-compose up``` //docker-compose를 사용하여 시작
 11. 이제 파이어 폭스로 127.0.0.1로 접속해 보면 성공적인 로켓 초기화면을 볼 수 있습니다.
