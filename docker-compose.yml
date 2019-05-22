@@ -1,4 +1,8 @@
 version: '3'
+
+volumes:
+  db-data: {}
+
 services:
   django:
     build:
@@ -31,6 +35,8 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=djangodocker_db
+    volumes:
+      - db-data:/var/lib/mysql
 
   nginx:
     image: nginx
