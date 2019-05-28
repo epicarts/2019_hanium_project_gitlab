@@ -1,1 +1,4 @@
-i sdfl,sdf
+from django.test import TestCase
+
+# Create your tests here.
+
