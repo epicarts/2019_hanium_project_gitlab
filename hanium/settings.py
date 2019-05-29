@@ -54,7 +54,7 @@ ROOT_URLCONF = 'hanium.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['accounts/templates', 'chat/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -72,15 +72,13 @@ WSGI_APPLICATION = 'hanium.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-import os 
-
 DATABASES = {
     'default': {
         #'ENGINE': 'django.db.backends.sqlite3',
         #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 	'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('DJANGO_DB_NAME', ''), 
-        'USER': os.getenv('DJANGO_USERNAME', 'root'), 
+        'NAME': os.getenv('DJANGO_DB_NAME', ''),
+        'USER': os.getenv('DJANGO_USERNAME', 'root'),
         'PASSWORD': os.getenv('DJANGO_DB_PASSWORD','root'),
         'HOST': os.getenv('DJANGO_DB_HOST','localhost'),
         'PORT': os.getenv('DJANGO_DB_PORT','3306')
@@ -125,3 +123,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR,'stiatic')
+
+
+#login redirect
+#LOGIN_REDIRECT_URL = '/'
+#LOGIN_URL = '/login'
+LOGOUT_REDIRECT_URL = '/accounts/login'
