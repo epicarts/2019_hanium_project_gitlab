@@ -8,6 +8,12 @@
 #### hanium folder
 - 디장고 프로젝트 패키지
 
+#### chat folder
+- django chat app: 디장고 채팅 관련 앱
+
+#### accounts folder
+- django accounts app: 디장고 로그인 관련 앱
+
 #### docke-compose.yml
 - django
 - mariadb
