@@ -29,8 +29,10 @@ ALLOWED_HOSTS = ['*']
 
 
 # Application definition
-
+#앱을 만들고 난뒤에 여기에 등록을 해야됨.
 INSTALLED_APPS = [
+    'accounts',
+    'chat',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -121,12 +123,25 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
-
+#URL로만 존재하는 최상위 경로.
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR,'stiatic')
+
+#개발 단계에서 사용하는 정적 파일들이 어디에 있는지에 대한 경로
+#findstatic은 해당 설정 위치에서 정적파일을 찾음
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'accounts', 'static'),]
+
+#Django 앱 디렉터리에 있는 static 디렉터리와 STATICFILES_DIRS에 지정된 경로에 있는 모든 파일을 모읍
+#실 환경에서 제공
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 
 
 #login redirect
 #LOGIN_REDIRECT_URL = '/'
 #LOGIN_URL = '/login'
 LOGOUT_REDIRECT_URL = '/accounts/login'
+
+#media file에 접근하는 URL
+MEDIA_URL = '/upload_files/'
+
+#실제 팡리이 위치하는 서버 내부 경로
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
