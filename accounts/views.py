@@ -3,6 +3,11 @@ from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
+from accounts.forms import RegistrationFrom
+from django.http import HttpResponseRedirect
+from django.template import RequestContext
+from django.contrib.auth.models import User
+
 class IndexView(View):
     def get(self, request, *args, **kwargs):
         context = {'parm1': 'hello', 'parm2': 'django', 'auth': request.user.is_authenticated}
@@ -14,6 +19,20 @@ class IndexView(View):
 def hello(request):
     print(request)
     return render(request, 'accounts/hello.html', {'title': 'hello accounts page', 'body': 'world'})
+
+def register_page(request):
+    if request.method == 'POST':
+        form = RegistrationFrom(request.POST)
+        if form.is_valid():
+            user = User.objects.create_user(
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password1']
+            )
+            return HttpResponseRedirect('/accounts/profile/')
+    else:
+        form = RegistrationFrom()
+
+    return render(request,'registration/register.html' , context={'form':form} )
 
 @login_required#로그인 데커레이터, 이게 붙어있는 함수는 반드시 로그인을 해야함. 하지 않으면 로그인 경로로 이동
 def profile(request):

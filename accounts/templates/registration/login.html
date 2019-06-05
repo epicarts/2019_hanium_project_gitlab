@@ -10,9 +10,15 @@
 <body>
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="submit">
-    <input type="reset" value="reset">
+    <p>
+      <label for="id_username">사용자 이름:</label>{{ form.username }}
+    </p>
+    <p>
+      <label for="id_password">비밀번호:</label>{{ form.password }}
+    </p>
+    
+    <input type="submit" value="로그인">
+    <input type="reset" value="초기화">
 </form>
 </body>
 </html>
