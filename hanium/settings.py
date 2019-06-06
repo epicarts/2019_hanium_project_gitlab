@@ -149,3 +149,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 # 채팅 Channels
 ASGI_APPLICATION = 'hanium.routing.application'
+#channel layer
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [("redis", 6379)],
+        },
+    },
+}
