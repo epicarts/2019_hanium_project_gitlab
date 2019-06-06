@@ -2,6 +2,7 @@ version: '3'
 
 volumes:
   db-data: {}
+  redisdata: {}
 
 services:
   django:
@@ -22,11 +23,12 @@ services:
       - "8000"
     volumes:
       - ./:/code/
-    #command: gunicorn hanium.wsgi:application --bind 0.0.0.0:8000 
+    #command: gunicorn hanium.wsgi:application --bind 0.0.0.0:8000
     command: bin/run.sh
     #command: bash -c "python manage.py migrate && gunicorn hanium.wsgi -b 0.0.0.0:8000"
     links:
       - db
+      - redis
     depends_on:
       - db
 
@@ -48,3 +50,9 @@ services:
       - ./compose/nginx:/etc/nginx/conf.d
     depends_on:
       - django
+  redis:
+    image: redis
+    expose:
+      - "6379"
+    volumes:
+      - redisdata:/data

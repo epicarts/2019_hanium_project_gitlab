@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 #앱을 만들고 난뒤에 여기에 등록을 해야됨.
 INSTALLED_APPS = [
+    'channels',
     'accounts',
     'chat',
     'django.contrib.admin',
@@ -145,3 +146,15 @@ MEDIA_URL = '/upload_files/'
 
 #실제 팡리이 위치하는 서버 내부 경로
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+
+# 채팅 Channels
+ASGI_APPLICATION = 'hanium.routing.application'
+#channel layer
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [("redis", 6379)],
+        },
+    },
+}
