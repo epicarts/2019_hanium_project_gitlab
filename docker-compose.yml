@@ -17,6 +17,7 @@ services:
       - DJANGO_DB_NAME=djangodocker_db
       - DJANGO_DB_USERNAME=root
       - DJANGO_DB_PASSWORD=root
+      - PYTHONUNBUFFERED=1
     ports:
       - "8000:8000"
     expose:
@@ -24,7 +25,8 @@ services:
     volumes:
       - ./:/code/
     #command: gunicorn hanium.wsgi:application --bind 0.0.0.0:8000
-    command: bin/run.sh
+    #command: bin/run.sh
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     #command: bash -c "python manage.py migrate && gunicorn hanium.wsgi -b 0.0.0.0:8000"
     links:
       - db
