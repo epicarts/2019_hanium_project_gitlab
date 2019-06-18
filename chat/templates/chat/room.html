@@ -1,5 +1,6 @@
 <!-- chat/templates/chat/room.html -->
 <!DOCTYPE html>
+{% load static %}
 <html>
 <head>
     <meta charset="utf-8"/>
@@ -7,22 +8,49 @@
 </head>
 
 <body>
-    <textarea id="chat-log" cols="100" rows="20"></textarea><br/>
+    <h1>{{ room.label }}</h1>
+    <h2>현재 접속한 유저 이름: {{user.username}}</h2>
+
+    <textarea id="chat-log" cols="100" rows="20">
+    </textarea><br/>
     <input id="chat-message-input" type="text" size="100"/><br/>
     <input id="chat-message-submit" type="button" value="Send"/>
-</body>
 
+    <form id="chatform">
+        <table id="chat">
+        <!-- 데이터 베이스로 넘겨받은 값을 반복 -->
+            <tbody>  
+                {% for message in messages %}
+                <tr>
+                    <td>{{ message.timestamp }}</td>
+                    <td>{{ message.username }}</td>
+                    <td>{{ message.message }}</td>
+                </tr> 
+                {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+                <td>Say something:</td>
+                <td colspan=2>
+            </td>
+            </tfoot>
+        </table>
+    </form>
+</body>
 <script>
-    var roomName = {{ room_name_json }};
+
+    var roomName = "{{ room.label }}";//{{ room_name_json }};
 
     var chatSocket = new WebSocket(
         'ws://' + window.location.host +
         '/ws/chat/' + roomName + '/');
 
+    // onmessage는 counsumers => 데이터를 뿌림 => 데이터를 받고 화면에 출력 
     chatSocket.onmessage = function(e) {
-        var data = JSON.parse(e.data);
-        var message = data['message'];
-        document.querySelector('#chat-log').value += (message + '\n');
+        var data = JSON.parse(e.data);//데이터를 받음.
+        var message = data['message'];//필요한 데이터 추출
+        var username = data['username']
+        document.querySelector('#chat-log').value += (message + '\n');//화면에 출력
     };
 
     chatSocket.onclose = function(e) {
@@ -39,12 +67,13 @@
     document.querySelector('#chat-message-submit').onclick = function(e) {
         var messageInputDom = document.querySelector('#chat-message-input');
         var message = messageInputDom.value;
+        var username = "{{ user.username }}"
         chatSocket.send(JSON.stringify({
-            'message': message
+            'message': message,
+            'username': username
         }));
 
         messageInputDom.value = '';
     };
 </script>
-
 </html>

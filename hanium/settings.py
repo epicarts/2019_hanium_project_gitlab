@@ -129,7 +129,7 @@ STATIC_URL = '/static/'
 
 #개발 단계에서 사용하는 정적 파일들이 어디에 있는지에 대한 경로
 #findstatic은 해당 설정 위치에서 정적파일을 찾음
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'accounts', 'static'),]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'accounts', 'static'), os.path.join(BASE_DIR, 'chat', 'static'),]
 
 #Django 앱 디렉터리에 있는 static 디렉터리와 STATICFILES_DIRS에 지정된 경로에 있는 모든 파일을 모읍
 #실 환경에서 제공
