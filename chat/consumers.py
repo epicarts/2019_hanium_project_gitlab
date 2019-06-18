@@ -1,12 +1,22 @@
 # chat/consumers.py
 from channels.generic.websocket import AsyncWebsocketConsumer
 import json
+from .models import Room, Message
+from channels.db import database_sync_to_async
+
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         #chat/routing.py 에 정의된 URL 파라미터에서 roomName을 얻음
         self.room_name = self.scope['url_route']['kwargs']['room_name']
         self.room_group_name = 'chat_%s' % self.room_name
+
+        #데이터 베이스에서 룸을 받음.
+        room = Room.objects.get(label=self.room_name)
+        #print(self.room_name)
+
+        #현재 방주소로 된 Room 모델 객체를 불러온다.
+        self.room_object = await self.get_room()
 
         # Join room group
         await self.channel_layer.group_add(
@@ -15,6 +25,16 @@ class ChatConsumer(AsyncWebsocketConsumer):
         )
 
         await self.accept()
+
+    @database_sync_to_async
+    def get_room(self):
+        return Room.objects.get(label=self.room_name)
+
+    @database_sync_to_async
+    def save_message(self, username, message):
+        m = Message(room=self.room_object, username=username, message=message)
+        return m.save()
+
 
     async def disconnect(self, close_code):
         # Leave room group
@@ -28,14 +48,19 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
+        username = text_data_json['username']
+        print("socket receive message: ", message)
+        print("socket receive username: ", username)
+        
+        await self.save_message(username,message)
 
-        # 아래에서는 그룹으로 메세지를 보내고 있다.
-        # Send message to room group
+        # 아래에서는 그룹으로 메세지를 보내고 있다. chat_message 이벤트로 보냄.
         await self.channel_layer.group_send(
             self.room_group_name,
             {
                 'type': 'chat_message',
-                'message': message
+                'message': message,
+                'username': username
             }
         )
 
@@ -43,8 +68,12 @@ class ChatConsumer(AsyncWebsocketConsumer):
     # Receive message from room group
     async def chat_message(self, event):
         message = event['message']
+        username = event['username']
+
+        print("send all group log",username, message)
 
         # Send message to WebSocket
         await self.send(text_data=json.dumps({
-            'message': message
+            'message': message,
+            'username': username
         }))
