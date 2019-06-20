@@ -79,12 +79,13 @@ DATABASES = {
     'default': {
         #'ENGINE': 'django.db.backends.sqlite3',
         #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-	'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('DJANGO_DB_NAME', ''),
-        'USER': os.getenv('DJANGO_USERNAME', 'root'),
-        'PASSWORD': os.getenv('DJANGO_DB_PASSWORD','root'),
-        'HOST': os.getenv('DJANGO_DB_HOST','localhost'),
-        'PORT': os.getenv('DJANGO_DB_PORT','3306')
+        'OPTIONS': {'charset': 'utf8mb4'},#한글 사용을 위해 추가
+        'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.getenv('DJANGO_DB_NAME', ''),
+            'USER': os.getenv('DJANGO_USERNAME', 'root'),
+            'PASSWORD': os.getenv('DJANGO_DB_PASSWORD','root'),
+            'HOST': os.getenv('DJANGO_DB_HOST','localhost'),
+            'PORT': os.getenv('DJANGO_DB_PORT','3306')
     }
 }
 
@@ -112,6 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
 LANGUAGE_CODE = 'ko-kr'
+DATABASES_OPTIONS = {'charset':'utf8'}
 
 TIME_ZONE = 'Asia/Seoul'
 
