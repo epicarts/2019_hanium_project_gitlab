@@ -6,6 +6,10 @@ body, button, dd, div, dl, dt, fieldset, form, h1, h2, h3, h4, h5, li, ol, p, ul
 div {
     display: block;
 }
+ul{
+    margin:0;
+    padding:0;
+}
 p {
     display: block;
     margin-block-start: 1em;
