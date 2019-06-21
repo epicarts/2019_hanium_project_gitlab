@@ -41,10 +41,8 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=djangodocker_db
       - TZ=Asia/Seoul
-
     volumes:
       - db-data:/var/lib/mysql
-      #- compose/mariadb/
     command: --character_set_client=utf8 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --character-set-client-handshake=FALSE
 
   nginx:
@@ -60,5 +58,7 @@ services:
     image: redis
     expose:
       - "6379"
+    environment:
+      - TZ=Asia/Seoul
     volumes:
       - redisdata:/data
