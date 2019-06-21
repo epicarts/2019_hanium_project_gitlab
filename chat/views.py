@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,redirect
 import json
 from .models import Room
+from django.utils import timezone
+
 
 def index(request):
     return render(request, 'chat/index.html', {})
@@ -17,7 +19,7 @@ def index(request):
 def room(request, room_name):
     #room 이 있다면 생성 
     room, created = Room.objects.get_or_create(label=room_name)
-    messages = reversed(room.messages.order_by('-timestamp')[:50])
+    messages = reversed(room.messages.order_by('-timestamp')[:5])
     #print(messages)
     return render(request, 'chat/room.html', {
         'room_name_json': mark_safe(json.dumps(room_name)),

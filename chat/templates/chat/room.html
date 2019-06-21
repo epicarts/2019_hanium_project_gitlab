@@ -11,31 +11,28 @@
     <h1>{{ room.label }}</h1>
     <h2>현재 접속한 유저 이름: {{user.username}}</h2>
 
-    <textarea id="chat-log" cols="100" rows="20">
-    </textarea><br/>
-    <input id="chat-message-input" type="text" size="100"/><br/>
-    <input id="chat-message-submit" type="button" value="Send"/>
-
-    <form id="chatform">
-        <table id="chat">
-        <!-- 데이터 베이스로 넘겨받은 값을 반복 -->
-            <tbody>  
-                {% for message in messages %}
-                <tr>
-                    <td>{{ message.timestamp }}</td>
-                    <td>{{ message.username }}</td>
-                    <td>{{ message.message }}</td>
-                </tr> 
-                {% endfor %}
-            </tbody>
-            <tfoot>
+    <table class="u-full-width" id="result">
+        <thead>
+          <tr>
+            <th>시간</th>
+            <th>아이디</th>
+            <th>메시지</th>
+          </tr>
+        </thead>
+        <tbody>  
+            {% for message in messages %}
             <tr>
-                <td>Say something:</td>
-                <td colspan=2>
-            </td>
-            </tfoot>
-        </table>
-    </form>
+                <td>{{ message.formated_timestamp }}</td>
+                <td>{{ message.username }}</td>
+                <td>{{ message.message }}</td>
+            </tr> 
+            {% endfor %}
+        </tbody>
+        <tbody id="bodytable">     
+        </tbody>
+      </table>
+      <input id="chat-message-input" type="text" size="100"/><br/>
+      <input id="chat-message-submit" type="button" value="Send"/>
 </body>
 <script>
 
@@ -47,10 +44,33 @@
 
     // onmessage는 counsumers => 데이터를 뿌림 => 데이터를 받고 화면에 출력 
     chatSocket.onmessage = function(e) {
+        console.log(e);
         var data = JSON.parse(e.data);//데이터를 받음.
-        var message = data['message'];//필요한 데이터 추출
-        var username = data['username']
-        document.querySelector('#chat-log').value += (message + '\n');//화면에 출력
+
+        listContainer = document.getElementById('bodytable');
+        list = document.createElement('tr');
+        listItem1 = document.createElement('td');
+        listItem2 = document.createElement('td');
+        listItem3 = document.createElement('td');
+        
+        listItem1.textContent = data['timestamp'];
+        listItem2.textContent = data['username'];
+        listItem3.textContent = data['message'];
+
+        list.appendChild(listItem1);
+        list.appendChild(listItem2);
+        list.appendChild(listItem3);
+
+        listContainer.appendChild(list);
+
+
+
+        //$('#bodytable').append(html);
+
+
+        //document.querySelector('#chat-log').value += (username + message + timestamp + '\n');//화면에 출력
+
+
     };
 
     chatSocket.onclose = function(e) {
