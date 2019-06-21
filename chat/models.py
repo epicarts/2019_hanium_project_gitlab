@@ -14,10 +14,12 @@ class Message(models.Model):
     room = models.ForeignKey(Room,on_delete=models.CASCADE, related_name='messages')
     username = models.TextField()
     message = models.TextField()
-    timestamp = models.DateTimeField(default=timezone.now,db_index=True)
+    timestamp = models.DateTimeField(auto_now_add=True,db_index=True)
 
-    def __unicode__(self):
-        return '[{timestamp}] {username}:{message}'.format(**self.as_dict())
+    def formated_timestamp(self):
+        return self.timestamp.strftime('%Y년 %m월 %d일 %H:%M')
+    # def __unicode__(self):
+    #     return '[{timestamp}] {username}:{message}'.format(**self.as_dict())
 
-    def as_dict(self):
-        return {'username':self.username, 'message':self.message, 'timestamp':self.timestamp}
+    # def as_dict(self):
+    #     return {'username':self.username, 'message':self.message, 'timestamp':self.timestamp}
