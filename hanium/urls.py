@@ -18,12 +18,13 @@ from django.urls import path, include
 from django.conf.urls import url
 from django.conf.urls.static import static
 from django.conf import settings
-
+import goologin.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     #accounts 로 접속시 accounts.urls.py 포함
     path('accounts/', include('accounts.urls'), ),
     url(r'^chat/', include('chat.urls')),
+    path('googlelogin/',include('allauth.urls')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

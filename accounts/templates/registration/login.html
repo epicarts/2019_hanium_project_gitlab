@@ -17,15 +17,15 @@
                     {% csrf_token %}
                  <div class="iwrapper">
                     <input class="itext m ng-untouched ng-pristine ng-invalid" name="username" formcontrolname="email" id="id_username" placeholder="이메일 아이디" type="email">
-                    
+
                     <p class="error_msg" style="display: none;"></p>
                 </div>
                 <div class="iwrapper">
                     <input class="itext m ng-untouched ng-pristine ng-invalid" name="password" formcontrolname="password" id="id_password" placeholder="비밀번호" type="password">
-                   
+
                     <p class="error_msg" style="display: none;"></p>
                 </div>
-            
+
             <div class="btn_wrapper mb20">
                 <button class="btn_def m vio" type="submit" value="submit">
                     <span>이메일로 로그인</span>
@@ -33,7 +33,7 @@
             </div>
         </form>
             <div class="stay_signed">
-                
+
                 <div class="link_find_pwd">
                     <a class="underline" href="/accounts/register/">회원가입</a> <span>/</span> <a class="underline">비밀번호 찾기</a>
                 </div>
@@ -42,7 +42,7 @@
             <div class="sns_signup">
                 <div class="text_tit"><p>소셜 아이디로 간편 로그인</p></div>
                 <ul class="btn_wrapper">
-                    <li><button class="btn_def m naver"><span><img alt="구글" height="18" src="{% static "accounts/img/login_google.png" %}" width="75"> 로그인</span></button></li>
+                    <li><button class="btn_def m naver" onclick="location.href='/googlelogin/google/login/' "><span><img alt="구글" height="18" src="{% static "accounts/img/login_google.png" %}" width="75"> 로그인</span></button></li>
                     <li><button class="btn_def m facebook"><span><img alt="페이스북" height="21" src="{% static "/accounts/img/login_facebook.png" %}" width="102"> 로그인</span></button></li>
                     <li><button class="btn_def m naver"><span><img alt="네이버" height="16" src="{% static "accounts/img/login_naver.png" %}" width="89"> 로그인</span></button></li>
                 </ul>
