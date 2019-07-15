@@ -154,7 +154,7 @@ LOGOUT_REDIRECT_URL = '/accounts/login'
 MEDIA_URL = '/upload_files/'
 
 #실제 팡리이 위치하는 서버 내부 경로
-MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 # 채팅 Channels
 ASGI_APPLICATION = 'hanium.routing.application'
