@@ -40,6 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'goologin.apps.GoologinConfig',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+
 ]
 
 MIDDLEWARE = [
@@ -57,7 +64,7 @@ ROOT_URLCONF = 'hanium.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['accounts/templates', 'chat/templates'],
+        'DIRS': ['accounts/templates', 'chat/templates', 'goologin/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -160,3 +167,10 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+#구글 로그인 추가
+AUTHENTICATION_BACKENDS = (
+'django.contrib.auth.backends.ModelBackend',
+'allauth.account.auth_backends.AuthenticationBackend',
+)
+SITE_ID = 1

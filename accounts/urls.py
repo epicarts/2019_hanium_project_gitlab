@@ -13,7 +13,8 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('profile/', views.profile, name='profile'),
     path('', views.hello),
-    path('register/', views.register_page)
+    path('register/', views.register_page),
+
     #127.0.0.1/accounts 뒤에 아무것도 없을때
     #path('', views.PostList.as_view())
 ]
