@@ -4,3 +4,4 @@ gunicorn
 channels
 cryptography
 channels_redis
+django-allauth
