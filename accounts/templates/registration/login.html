@@ -3,38 +3,68 @@
 {% load static %}
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="{% static "accounts/css/login.css" %}" media="screen">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="{% static "accounts/favicon.ico" %}">
+
+    <title>Signin</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "accounts/css/bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static "accounts/css/signin.css" %}" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!--<link rel="stylesheet" href="{% static "accounts/css/login.css" %}" media="screen">
+    <link rel="stylesheet" href="{% static "accounts/css/bootstrap.min.css" %}" media="screen">-->
 </head>
 <body>
-	<div class="logo_img">
+	<div class="form-signin">
         <img alt="로고" height="300" src="{% static "accounts/img/logo.png" %}" width="300">
     </div>
-	<div class="temp info_change">
-        <div class="member_box">
-            <form method="post" novalidate="" class="ng-untouched ng-pristine ng-invalid">
+	<div class="form-signin">
+            <h2 class="form-signin-heading">로그인</h2>
+        <div class="form-signin">
+            <form method="post" novalidate="" class="form-signin">
                     {% csrf_token %}
-                 <div class="iwrapper">
-                    <input class="itext m ng-untouched ng-pristine ng-invalid" name="username" formcontrolname="email" id="id_username" placeholder="이메일 아이디" type="email">
-
+                 <div class="form-signin">
+                    <input class="form-control" name="username" formcontrolname="email" id="id_username" placeholder="이메일 아이디" type="email">
+                    
                     <p class="error_msg" style="display: none;"></p>
                 </div>
-                <div class="iwrapper">
-                    <input class="itext m ng-untouched ng-pristine ng-invalid" name="password" formcontrolname="password" id="id_password" placeholder="비밀번호" type="password">
-
+                <div class="form-signin">
+                    <input class="form-control" name="password" formcontrolname="password" id="id_password" placeholder="비밀번호" type="password">
+                   
                     <p class="error_msg" style="display: none;"></p>
                 </div>
-
-            <div class="btn_wrapper mb20">
-                <button class="btn_def m vio" type="submit" value="submit">
+                <div class="checkbox">
+                        <label>
+                          <input type="checkbox" value="remember-me"> Remember me
+                        </label>
+                      </div>
+            <div class="form-signin">
+                <button class="btn btn-lg btn-primary btn-block" type="submit" value="submit">
                     <span>이메일로 로그인</span>
                 </button>
             </div>
         </form>
-            <div class="stay_signed">
+            <div class="container">
+                
+                <div class="container">
 
-                <div class="link_find_pwd">
                     <a class="underline" href="/accounts/register/">회원가입</a> <span>/</span> <a class="underline">비밀번호 찾기</a>
                 </div>
             </div>
