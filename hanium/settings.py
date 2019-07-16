@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'channels',
     'accounts',
     'chat',
+    'main',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -64,7 +65,7 @@ ROOT_URLCONF = 'hanium.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['accounts/templates', 'chat/templates', 'goologin/templates'],
+        'DIRS': ['accounts/templates', 'chat/templates', 'goologin/templates', 'main/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -138,7 +139,7 @@ STATIC_URL = '/static/'
 
 #개발 단계에서 사용하는 정적 파일들이 어디에 있는지에 대한 경로
 #findstatic은 해당 설정 위치에서 정적파일을 찾음
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'accounts', 'static'), os.path.join(BASE_DIR, 'chat', 'static'),]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'accounts', 'static'), os.path.join(BASE_DIR, 'chat', 'static'), os.path.join(BASE_DIR, 'main', 'static'),]
 
 #Django 앱 디렉터리에 있는 static 디렉터리와 STATICFILES_DIRS에 지정된 경로에 있는 모든 파일을 모읍
 #실 환경에서 제공
@@ -146,8 +147,8 @@ STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 
 
 #login redirect
-#LOGIN_REDIRECT_URL = '/'
 #LOGIN_URL = '/login'
+LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/accounts/login'
 
 #media file에 접근하는 URL
