@@ -34,6 +34,7 @@ def register_page(request):
 
     return render(request,'registration/register.html' , context={'form':form} )
 
+
 @login_required#로그인 데커레이터, 이게 붙어있는 함수는 반드시 로그인을 해야함. 하지 않으면 로그인 경로로 이동
 def profile(request):
     data = {'last_login': request.user.last_login, 'username': request.user.username,
