@@ -17,6 +17,9 @@
             <td><B>방제목</B></td>
             <td><B>작성자</B></td>
             <td><B>현재인원</B></td>
+            <td><B>시작시간</B></td>
+            <td><B>종료시간</B></td>
+
         </tr>
         </thead>
         <tbody>
@@ -26,8 +29,12 @@
             <td>{{posting.roomname}}</td>
             <td>{{posting.name}}</td>
             <td>{{posting.nowcount}}</td>
+            <td>{{posting.start_date}}</td>
+            <td>{{posting.end_date}}</td>
+
         </tr>
         {% endfor %}
         <tbody>
     </table>
+    <button onclick="location.href='/googlelogin/google/login/' ">개설하기</button>
 </body>
