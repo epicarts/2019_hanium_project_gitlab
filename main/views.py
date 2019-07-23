@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views import View
 from .models import Posting
 from django.contrib.auth.decorators import login_required
+from .forms import CreateMain
 # Create your views here.
 def main(request):
     print(request)
@@ -11,3 +12,16 @@ def seo(request):
     postings=Posting.objects.all()
     context={'postings':postings}
     return render(request,'main/seo.html',context)
+
+def createMain(request):
+    if request.method == 'POST':
+        form = CreateMain(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('seo')
+        else:
+            return redirect('seo')
+    else:
+        form = CreateMain()
+        return render(request,'createMain.html',{"form":form})
