@@ -14,14 +14,14 @@ def seo(request):
     return render(request,'main/seo.html',context)
 
 def createMain(request):
-    if request.method == 'POST':
+    if request.method == 'post':
         form = CreateMain(request.POST)
 
         if form.is_valid():
             form.save()
-            return redirect('seo')
+            return redirect('main')
         else:
             return redirect('seo')
     else:
         form = CreateMain()
-        return render(request,'createMain.html',{"form":form})
+        return render(request,'main/seo.html',{"form":form})
