@@ -65,7 +65,7 @@ ROOT_URLCONF = 'hanium.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['accounts/templates', 'chat/templates', 'goologin/templates', 'main/templates'],
+        'DIRS': ['accounts/templates', 'chat/templates', 'goologin/templates', 'main/templates','templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
