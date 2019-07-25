@@ -19,6 +19,7 @@ from django.conf.urls import url
 from django.conf.urls.static import static
 from django.conf import settings
 import goologin.views
+import main.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
