@@ -17,7 +17,7 @@ def index(request):
 
 @login_required
 def room(request, room_name):
-    #room 이 있다면 생성 
+    #room 이 있다면 생성
     room, created = Room.objects.get_or_create(label=room_name)
     messages = reversed(room.messages.order_by('-timestamp')[:5])
     #print(messages)

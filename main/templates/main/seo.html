@@ -23,16 +23,9 @@
         </tr>
         </thead>
         <tbody>
-          {% for posting in postings %}
         <tr>
-            <td>{{posting.group}}</td>
-            <td>{{posting.roomname}}</td>
-            <td>{{posting.name}}</td>
-            <td>{{posting.nowcount}}</td>
-            <td>{{posting.start_date}}</td>
-            <td>{{posting.end_date}}</td>
         </tr>
-        {% endfor %}
+        {% endfor %} <<<----- ?????????
         <tbody>
     </table>
 <button onclick="location.href='{% url 'main:createMain' %}' "> 방생성</button>

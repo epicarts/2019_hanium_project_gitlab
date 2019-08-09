@@ -5,3 +5,4 @@ channels
 cryptography
 channels_redis
 django-allauth
+Pillow

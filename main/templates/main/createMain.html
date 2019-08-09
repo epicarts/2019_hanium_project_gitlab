@@ -5,7 +5,7 @@
     <title>방생성하기</title>
   </head>
   <body>
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
       {{form.as_p}}
       <input type="submit" value="방생성">
