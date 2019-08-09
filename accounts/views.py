@@ -28,7 +28,7 @@ def register_page(request):
                 username=form.cleaned_data['username'],
                 password=form.cleaned_data['password1']
             )
-            return HttpResponseRedirect('/accounts/profile/')
+            return HttpResponseRedirect('/')#회원가입 완료시 리다이렉트 되는 곳
     else:
         form = RegistrationFrom()
 
