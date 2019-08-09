@@ -26,7 +26,7 @@ services:
       - ./:/code/
     #command: gunicorn hanium.wsgi:application --bind 0.0.0.0:8000
     #command: bin/run.sh
-    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: bash -c "python manage.py makemigrations main && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     #command: bash -c "python manage.py migrate && gunicorn hanium.wsgi -b 0.0.0.0:8000"
     links:
       - db
