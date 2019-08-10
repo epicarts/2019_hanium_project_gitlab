@@ -18,6 +18,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         #현재 방주소로 된 Room 모델 객체를 불러온다.
         self.room_object = await self.get_room()
+        print(self.room_object)
+
 
         # Join room group
         await self.channel_layer.group_add(

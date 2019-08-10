@@ -1,23 +1,32 @@
 from django.db import models
 from django.utils import timezone
+from main.models import Posting
+
+
+class ChatRoom(models.Model):
+    a=models.ForeignKey(Posting,on_delete=True)
+
 
 class Room(models.Model):
-    name = models.TextField()
     label = models.SlugField(unique=True)
-
+    name = models.TextField()
+    
     def __unicode__(self):
         return self.label
+
 
 class Message(models.Model):
     
     #바라보는 값이 삭제 되면 같이 삭제됨.
     room = models.ForeignKey(Room,on_delete=models.CASCADE, related_name='messages')
     username = models.TextField()
-    message = models.TextField()
+    message = models.TextField(max_length=3000)
     timestamp = models.DateTimeField(auto_now_add=True,db_index=True)
 
     def formated_timestamp(self):
         return self.timestamp.strftime('%Y년 %m월 %d일 %H:%M')
+
+
     # def __unicode__(self):
     #     return '[{timestamp}] {username}:{message}'.format(**self.as_dict())
 

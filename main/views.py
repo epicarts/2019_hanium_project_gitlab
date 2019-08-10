@@ -4,6 +4,8 @@ from .models import Posting
 from django.contrib.auth.decorators import login_required
 from .forms import CreateMain
 
+from django.core.signing import Signer
+
 # Create your views here.
 @login_required
 def main(request):

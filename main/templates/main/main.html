@@ -50,11 +50,11 @@
             <td>{{posting.group}}</td>
             <td>{{posting.roomname}}</td>
             <td>{{posting.author}}</td>
-            <td><button onclick>방 입장하기</button><td>
+            <td><button onclick="location.href='{% url 'room:room_detail' posting.author %}' ">방 입장하기 {{ posting.pk }}</button><td>
+
         </tr>
         {% endfor %}
         <tbody>
     </table>
-
 </body>
 </html>

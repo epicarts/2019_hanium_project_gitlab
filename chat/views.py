@@ -8,8 +8,8 @@ from .models import Room
 from django.utils import timezone
 
 
-def index(request):
-    return render(request, 'chat/index.html', {})
+# def index(request):
+#     return render(request, 'chat/index.html', {})
 
 # @login_required
 # def new_room(request, room_name):
