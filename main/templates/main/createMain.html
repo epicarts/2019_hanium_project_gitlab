@@ -5,6 +5,12 @@
     <title>방생성하기</title>
   </head>
   <body>
+    <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="{%url 'main:roomlist'%}">발표! 너도할수있어!</a>
+      </div>
+  </nav>
     <form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
       {{form.as_p}}
