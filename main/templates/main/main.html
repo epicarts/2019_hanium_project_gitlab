@@ -22,13 +22,12 @@
         </tr>
         </thead>
         <tbody>
-          {% for posting in postings %}
+          {% for Room in RoomList %}
         <tr>
-            <td>{{posting.group}}</td>
-            <td>{{posting.roomname}}</td>
-            <td>{{posting.author}}</td>
-            <td><button class="btn" onclick="location.href='{% url 'room:room_detail' posting.author %}' ">방 입장하기 {{ posting.pk }}</button><td>
-
+            <td>{{Room.group}}</td>
+            <td>{{Room.roomname}}</td>
+            <td>{{Room.author}}</td>
+            <td><button class="btn" onclick="location.href='{% url 'chat:room_detail' Room.pk %}' ">방 입장하기 {{ Room.pk }}</button><td>
         </tr>
         {% endfor %}
         <tbody>
