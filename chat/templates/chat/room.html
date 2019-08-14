@@ -1,13 +1,13 @@
-<!-- chat/templates/chat/room.html -->
-<!DOCTYPE html>
-{% load static %}
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title>Chat Room</title>
-</head>
+{% extends "base.html" %}
+{% block title %}
+Chat-room
+{% endblock%}
 
-<body>
+{% block content %}
+<br>
+<br>
+<br>
+<br>
     <h1>{{ room.label }}</h1>
     <h2>현재 접속한 유저 이름: {{user.username}}</h2>
 
@@ -96,4 +96,4 @@
         messageInputDom.value = '';
     };
 </script>
-</html>
+{% endblock%}
