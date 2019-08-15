@@ -6,7 +6,7 @@ from django.shortcuts import render,redirect
 import json
 from .models import Room
 from django.utils import timezone
-
+from django.contrib import messages
 
 # def index(request):
 #     return render(request, 'chat/index.html', {})
@@ -47,13 +47,14 @@ def room(request, room_pk):
     #퍼미션을 가지고 있다면 정상적으로 페이지를 보여줌
     if request.user.has_perm(perimssion_codename):
         room = Room.objects.get(pk=room_pk)
-        messages = reversed(room.messages.order_by('-timestamp')[:5])
+        room_messages = reversed(room.messages.order_by('-timestamp')[:5])
         return render(request, 'chat/room.html', {
             'room_pk_json': mark_safe(json.dumps(room_pk)),
-            'messages':messages,
+            'messages':room_messages,
             'room':room,#데이터 베이스를 통째로 넘겨줌
         })
     #퍼미션을 가지고 있지 않다면,
     else:
+        messages.add_message(request, messages.ERROR, '권한이 없습니다.')
         return redirect('main:RoomList')
 

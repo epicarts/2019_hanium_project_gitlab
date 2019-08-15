@@ -26,52 +26,6 @@ def main(request):
 
 @login_required
 def createMain(request):
-    print(request.user)
-    key = Room.objects.last()
-
-    # 다른 앱에 있는 모델을 가져 올 수도 있음.
-    '''
-    content_type = ContentType.objects.get(app_label='myapp', model='BlogPost')
-    '''
-
-    # auth | 사용자 | Can access RoomList 이런식으로 추가됨
-    # 즉, auth 앱에 사용자라는 모델 전부에 코드네임 can_accessasad 이름으로 권한이 추가됨. 이걸 어떻게 쓸지는 내 마음.
-    # ct = ContentType.objects.get_for_model(Room) # 모델을 가져와서 유저에 매칭 ??? 
-    # permission = Permission.objects.get_or_create(codename='can_acces4sac3sad', name='Can access RoomList', content_type=ct)
-    # print("get_or_create",permission[0])
-    # permission = Permission.objects.get(codename='can_acces4sac3sad')
-    # print("get",permission)
-
-    '''
-    content_type = ContentType.objects.get(app_label='myapp', model='BlogPost')
-    permission = Permission.objects.create(codename='can_publish',
-                                        name='Can Publish Posts',
-                                        content_type=content_type)
-    user = User.objects.get(username='duke_nukem')
-    group = Group.objects.get(name='wizard')
-    group.permissions.add(permission)
-    user.groups.add(group)
-    '''
-    '''
-
-    #새로운 그룹 정보를 가져온 뒤
-    group = Group.objects.get(name='new_group')
-    print("new_group",new_group,"///group",group)
-
-    
-
-    #해당 그룹에 퍼미션을 추가 시킨다. 퍼미션은 위에서 만든 새로운 퍼미션
-    # group.permissions.add(permission)
-
-    #유저는 유저 이름을 가져오는것으로 유저를 불러올 수 있다.
-    user = User.objects.get(username=request.user) # username= request.user
-    print("request.user",request.user,"///user",user)
-
-    #user는 그룹에 가입을 시킴으로 써 퍼미션을 가질 수 있다.
-    request.user.groups.add(new_group)
-    request.user.groups.add(group)
-    '''
-
     if request.method == 'POST':
         form = CreateMain(request.POST)
         if form.is_valid():#폼 형식이 맞으면
