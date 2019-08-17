@@ -34,7 +34,7 @@
 </body>
 <script>
 
-    var roomName = "{{ room.label }}";//{{ room_name_json }};
+    var roomName = "{{ room.pk }}";//{{ room_name_json }};
 
     var chatSocket = new WebSocket(
         'ws://' + window.location.host +

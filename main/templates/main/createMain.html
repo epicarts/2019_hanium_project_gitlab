@@ -1,3 +1,13 @@
+<!-- 폼 입력 실패시 띄울 메시지  -->
+{% if messages %}
+    {% for message in messages %}
+      {% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+        <script>
+          alert('{{message}}')
+        </script>
+      {% endif %}
+    {% endfor %}
+{% endif %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -9,6 +19,6 @@
       {% csrf_token %}
       {{form.as_p}}
       <input type="submit" value="방생성">
-      </form>
+    </form>
   </body>
 </html>
