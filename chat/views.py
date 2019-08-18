@@ -25,6 +25,14 @@ def my_view(request):
 has_perm() 함수와 동일하게, . 과 같이 지정하면 된다. `permission_required()` 함수 또한 `login_url` 를 인자로 받을 수 있으며, `raise_exception`이 주어지면, `PermissionDenied` 에러가 발생하며 로그인 페이지로 이동하는 대신 403에러 페이지를 보여주게 된다.
 '''
 
+def room_delete(request, room_pk):
+    #방 삭제 검증 한번 더. 
+    perimssion_codename_del = 'main.room_'+ str(room_pk) +'_delete'
+    if request.user.has_perm(perimssion_codename_del):
+        room = Room.objects.get(pk = room_pk)
+        room.delete()
+        return redirect('main:RoomList')
+
 @login_required
 def room(request, room_pk):
     '''
@@ -46,10 +54,17 @@ def room(request, room_pk):
         if request.user.has_perm(perimssion_codename):
             room = Room.objects.get(pk=room_pk)
             room_messages = reversed(room.messages.order_by('-timestamp')[:5])
+            
+            perimssion_codename_del = 'main.room_'+ str(room_pk) +'_delete'
+            perimssion_del =False
+            if request.user.has_perm(perimssion_codename_del):
+                perimssion_del = True
+
             return render(request, 'chat/room.html', {
                 'room_pk_json': mark_safe(json.dumps(room_pk)),
                 'messages':room_messages,
                 'room':room,
+                'perimssion_del':perimssion_del,
             }) 
         else:#처음 방 입장을 하면 패스워드가 없으므로 패스워드 입력 페이지를 랜더링
             messages.add_message(request, messages.INFO, room_pk)#request에 message 추가
