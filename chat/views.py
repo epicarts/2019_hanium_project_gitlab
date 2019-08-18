@@ -7,7 +7,7 @@ import json
 from .models import Room
 from django.utils import timezone
 from django.contrib import messages
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import Group
 
 # def index(request):
@@ -63,8 +63,13 @@ def room(request, room_pk):
             new_group = Group.objects.get(name=groupname) 
             request.user.groups.add(new_group)
             # 200 == success, 리다이렉션 처리는 js에서 함
-            print("접속 성공")
-            return HttpResponse('인증 되었습니다.',content_type='application/json', status=200) # http status 200
+            #messages.add_message(request, messages.INFO, room_pk)#request에 message 추가
+            print("인증 성공",room_pk)
+            return JsonResponse({
+                'message' : '인증에 성공하였습니다.', 
+            }) # http status 200
             
         else:#패스워드가 다르면 리다이렉트...
-            return HttpResponse('패스워드가 잘못 되었습니다.', content_type='application/json', status=400) #  http status 400 잘못된 패스워드, 리다이렉션 처리는 js에서 함
+            return JsonResponse({
+                'message' :'패스워드가 잘못 되었습니다.',
+            }, status=400) #  http status 400 잘못된 패스워드, 리다이렉션 처리는 js에서 함

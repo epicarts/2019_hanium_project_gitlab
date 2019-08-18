@@ -56,7 +56,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         # 아래에서는 그룹으로 메세지를 보내고 있다. chat_message 이벤트로 보냄.
         await self.channel_layer.group_send(
-            self.room_group_name,
+            self.room_group_name,#그룹 이름
             {
                 'type': 'chat_message',
                 'message': message,

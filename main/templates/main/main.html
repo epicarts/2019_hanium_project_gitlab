@@ -37,25 +37,28 @@
             var returnValue=prompt('패스워드를 입력해 주세요');
             if(returnValue){
                 $.post({
-                    url: 'room/'+"{{message}}"+'/',
+                    url: 'room/'+roompk+'/',
                     dataType:"json",
                     data: {'csrfmiddlewaretoken': csrftoken, password: returnValue},
-                    error: function(error) {
-                        alert(error.responseText);
+                    error: function(request, status, error) {
+                        //console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                     },
                     success: function(data) {
-                        newDoc('/room/'+"{{message}}"+'/')
-                        alert(success.responseText);
-                        window.location.href('/room/'+"{{message}}"+'/');
-                        window.location.assign('/room/'+"{{message}}"+'/');
-                        window.location = '/room/'+"{{message}}"+'/';
-                        return false;
+                        //console.log('success');
+                        alert(data['message']);
+                        url =  '/room/'+roompk+'/';
+                        window.location = url;
+                        return;
                     },
                 });
             }
             else{
-                window.location = 'http://naver.com';
-                alert("패스워드 입력을 취소 했습니다.");
+                if (returnValue == null){
+                    alert("패스워드 입력을 취소 했습니다.");
+                }
+                else{
+                    alert("패스워드 입력이 없습니다.");
+                }
             }
         </script>
     {% endfor %}
