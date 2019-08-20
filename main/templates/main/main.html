@@ -9,6 +9,60 @@
         <br>
         <br>
         <br>
+<!-- 방 접근시 실패하면 띄울 메시지  -->
+{% if messages %}
+    {% for message in messages %}
+        <script>
+            function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = jQuery.trim(cookies[i]);
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+            function newDoc(url_link) {
+                window.location.assign(url_link)
+            }
+            var csrftoken = getCookie('csrftoken');
+
+            var roompk = '{{message}}'
+            var returnValue=prompt('패스워드를 입력해 주세요');
+            if(returnValue){
+                $.post({
+                    url: 'room/'+roompk+'/',
+                    dataType:"json",
+                    data: {'csrfmiddlewaretoken': csrftoken, password: returnValue},
+                    error: function(request, status, error) {
+                        //console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                    },
+                    success: function(data) {
+                        //console.log('success');
+                        alert(data['message']);
+                        url =  '/room/'+roompk+'/';
+                        window.location = url;
+                        return;
+                    },
+                });
+            }
+            else{
+                if (returnValue == null){
+                    alert("패스워드 입력을 취소 했습니다.");
+                }
+                else{
+                    alert("패스워드 입력이 없습니다.");
+                }
+            }
+        </script>
+    {% endfor %}
+{% endif %}
 
 <!-- 방리스트 하기-->
 <div class="container">
@@ -18,17 +72,16 @@
             <td><B>소속</B></td>
             <td><B>방제목</B></td>
             <td><B>작성자</B></td>
-            <td><B>방입장하기 버튼 있는곳</B></td>
+            <td><B>방패스워드 입력</B></td>
         </tr>
         </thead>
         <tbody>
-          {% for posting in postings %}
+          {% for Room in RoomList %}
         <tr>
-            <td>{{posting.group}}</td>
-            <td>{{posting.roomname}}</td>
-            <td>{{posting.author}}</td>
-            <td><button class="btn" onclick="location.href='{% url 'room:room_detail' posting.author %}' ">방 입장하기 {{ posting.pk }}</button><td>
-
+            <td>{{Room.group}}</td>
+            <td>{{Room.roomname}}</td>
+            <td>{{Room.author}}</td>
+            <td><button class="btn" onclick="location.href='{% url 'chat:room_detail' Room.pk %}' ">방 입장하기 {{ Room.pk }}</button><td>
         </tr>
         {% endfor %}
         <tbody>
@@ -39,15 +92,7 @@
 <button class="btn btn-default pull-right" onclick="location.href='{% url 'main:createMain' %}' "> 방생성</button>
 
 </div>
-<div class="text-center">
-        <ul class="pagination">
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-        </ul>
-    </div>
 
-
+            
+             
     {% endblock%}

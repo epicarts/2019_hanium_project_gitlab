@@ -8,9 +8,7 @@ Chat-room
 <br>
 <br>
 <br>
-    <h1>{{ room.label }}</h1>
     <h2>현재 접속한 유저 이름: {{user.username}}</h2>
-
     <table class="u-full-width" id="result">
         <thead>
           <tr>
@@ -30,13 +28,18 @@ Chat-room
         </tbody>
         <tbody id="bodytable">     
         </tbody>
-      </table>
-      <input id="chat-message-input" type="text" size="100"/><br/>
-      <input id="chat-message-submit" type="button" value="Send"/>
+    </table>
+        <input id="chat-message-input" type="text" size="100"/><br/>
+        <input id="chat-message-submit" type="button" value="Send"/>
+        
+        {% if perimssion_del %}
+        <!-- 방 삭제시 띄울 메시지  -->
+            <a href="{% url 'chat:room_delete' room_pk=room.pk %}" role="button" onclick="return confirm('정말 삭제하시겠습니까?')">방 삭제</a>
+        {% endif %}
 </body>
 <script>
 
-    var roomName = "{{ room.label }}";//{{ room_name_json }};
+    var roomName = "{{ room.pk }}";//{{ room_name_json }};
 
     var chatSocket = new WebSocket(
         'ws://' + window.location.host +

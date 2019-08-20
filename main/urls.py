@@ -9,7 +9,7 @@ app_name='main'
 
 urlpatterns = [
     #로그인 성공 시 => profile로 리다이텍트 됨 settings
-    path('', views.main, name='roomlist'),
+    path('', views.main, name='RoomList'),
     #path('seo/',views.seo,name='seo'),
     path('createMain/',views.createMain,name='createMain'),
 #    path('imroom/',views.imroom,name='imroom'),

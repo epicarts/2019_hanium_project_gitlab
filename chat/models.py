@@ -1,20 +1,8 @@
 from django.db import models
 from django.utils import timezone
-from main.models import Posting
+from main.models import Room
 
-
-class ChatRoom(models.Model):
-    a=models.ForeignKey(Posting,on_delete=True)
-
-
-class Room(models.Model):
-    label = models.SlugField(unique=True)
-    name = models.TextField()
-    
-    def __unicode__(self):
-        return self.label
-
-
+# main.models.Room 을 외래키로 가져옴
 class Message(models.Model):
     
     #바라보는 값이 삭제 되면 같이 삭제됨.

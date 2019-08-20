@@ -8,6 +8,17 @@
 <br>
 <br>
 <br>
+
+<!-- 입력 실패시 띄울 메시지  -->
+{% if messages %}
+    {% for message in messages %}
+      {% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+        <script>
+          alert('{{message}}')
+        </script>
+      {% endif %}
+    {% endfor %}
+{% endif %}
     <form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
       {{form.as_p}}
