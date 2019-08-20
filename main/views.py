@@ -25,7 +25,7 @@ def main(request):
 @login_required
 def createMain(request):
     if request.method == 'POST':
-        form = CreateMain(request.POST)
+        form = CreateMain(request.POST, request.FILES)# request.FILES를 추가 시켜야 파일 업로드 가능
         if form.is_valid():#폼 형식이 맞으면
             #cleaned_data는 사용자가 입력한 데이터를 뜻한다.
             if form.cleaned_data['password']  == form.cleaned_data['confirm_password']:
