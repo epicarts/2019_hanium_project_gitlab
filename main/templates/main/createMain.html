@@ -1,3 +1,14 @@
+{% extends "base.html" %}
+{% block title %}
+방생성하기
+{% endblock%}
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+
 <!-- 입력 실패시 띄울 메시지  -->
 {% if messages %}
     {% for message in messages %}
@@ -8,17 +19,9 @@
       {% endif %}
     {% endfor %}
 {% endif %}
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>방생성하기</title>
-  </head>
-  <body>
     <form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
       {{form.as_p}}
       <input type="submit" value="방생성">
-    </form>
-  </body>
-</html>
+      </form>
+{% endblock%}
