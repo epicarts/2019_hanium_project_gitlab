@@ -9,13 +9,9 @@ from django.utils import timezone
 from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import Group
+import os
+from django.conf import settings 
 
-# def index(request):
-#     return render(request, 'chat/index.html', {})
-
-# @login_required
-# def new_room(request, room_name):
-#     return redirect(room,label='새로 만들 방 이름을 라벨로...')
 '''
 from django.contrib.auth.decorators import permission_required
 
@@ -30,8 +26,17 @@ def room_delete(request, room_pk):
     perimssion_codename_del = 'main.room_'+ str(room_pk) +'_delete'
     if request.user.has_perm(perimssion_codename_del):
         room = Room.objects.get(pk = room_pk)
+
+        #업로드한 파일이 존재하면 삭제.
+        if room.uploadfile:
+            os.remove(os.path.join(settings.MEDIA_ROOT, room.uploadfile.path))
+        
+        #그룹 및 권한 삭제 추가 예정
+
+        #데이터 베이스 삭제.
         room.delete()
         return redirect('main:RoomList')
+
 
 @login_required
 def room(request, room_pk):
