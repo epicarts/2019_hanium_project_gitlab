@@ -14,6 +14,7 @@ urlpatterns = [
     path('profile/', views.ProfileView.as_view(), name='profile'),
     path('', views.hello),
     path('register/', views.RegisterView.as_view(), name='register'),
+    path('password/change/', views.PasswordChange.as_view(), name='password_change'),
 
     #127.0.0.1/accounts 뒤에 아무것도 없을때
     #path('', views.PostList.as_view())
