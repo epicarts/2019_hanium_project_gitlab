@@ -20,8 +20,13 @@ def hello(request):
     print(request)
     return render(request, 'accounts/hello.html', {'title': 'hello accounts page', 'body': 'world'})
 
-def register_page(request):
-    if request.method == 'POST':
+class RegisterView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        form = RegistrationFrom()
+        return render(request,'registration/register.html' , context={'form':form} )
+
+
+    def post(self, request, *args, **kwargs):
         form = RegistrationFrom(request.POST)
         if form.is_valid():
             if form.cleaned_data['password2']  == form.cleaned_data['password1']:
@@ -36,18 +41,11 @@ def register_page(request):
             else:
                 form.add_error('password2', '패스워드가 일치하지 않습니다.')
 
-
-    if request.method == 'GET':
-        form = RegistrationFrom()
-    
-    return render(request,'registration/register.html' , context={'form':form} )
-
-
-@login_required#로그인 데커레이터, 이게 붙어있는 함수는 반드시 로그인을 해야함. 하지 않으면 로그인 경로로 이동
-def profile(request):
-    data = {'last_login': request.user.last_login, 'username': request.user.username,
-            'password': request.user.password, 'is_authenticated': request.user.is_authenticated}
-    return render(request, 'accounts/profile.html', context={'data': data})
+# @login_required#로그인 데커레이터, 이게 붙어있는 함수는 반드시 로그인을 해야함. 하지 않으면 로그인 경로로 이동
+# def profile(request):
+#     data = {'last_login': request.user.last_login, 'username': request.user.username,
+#             'password': request.user.password, 'is_authenticated': request.user.is_authenticated}
+#     return render(request, 'accounts/profile.html', context={'data': data})
 
 # def profile(request):
 #     if not request.user.is_authenticated:#인증되지 않았다면
@@ -58,8 +56,15 @@ def profile(request):
 #     return render(request, 'accounts/profile.html', context={'data': data})
 #
 #클래스로 만듦. Mixin 를 사용해야함. 클래스 이하에 있는 모든 함수는 로그인이 반드시 필요.
-# class ProfileView(LoginRequiredMixin, View):
-#     def get(self, request, *args, **kwargs):
-#         data = {'last_login': request.user.last_login, 'username': request.user.username,
-#                 'password': request.user.password, 'is_authenticated': request.user.is_authenticated}
-#         return render(request, 'profile.html', context={'data': data})
+class ProfileView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        data = {'last_login': request.user.last_login, 'username': request.user.username,
+                'password': request.user.password, 'is_authenticated': request.user.is_authenticated}
+        return render(request, 'accounts/profile.html', context={'data': data})
+    
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            # cleaned_data로 관련 로직 처리
+            return HttpResponseRedirect('/success/')
+        return render(request, self.template_name, {'form':form})

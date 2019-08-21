@@ -11,7 +11,7 @@ urlpatterns = [
     #로그인 성공 시 => profile로 리다이텍트 됨 settings
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    path('profile/', views.profile, name='profile'),
+    path('profile/', views.ProfileView.as_view(), name='profile'),
     path('', views.hello),
     path('register/', views.register_page),
 
