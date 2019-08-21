@@ -8,9 +8,6 @@ list
 <br>
 <br>
 <br>
-    {% if form.errors %}
-      <p> 사용자 이름과 비밀번호가 일치 하지 않음</p>
-    {% endif %}
     <form class="" action="." method="post">
       {% csrf_token %}
       {{ form.as_p }}

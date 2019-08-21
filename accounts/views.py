@@ -24,14 +24,22 @@ def register_page(request):
     if request.method == 'POST':
         form = RegistrationFrom(request.POST)
         if form.is_valid():
-            user = User.objects.create_user(
-                username=form.cleaned_data['username'],
-                password=form.cleaned_data['password1']
-            )
-            return HttpResponseRedirect('/')#회원가입 완료시 리다이렉트 되는 곳
-    else:
-        form = RegistrationFrom()
+            if form.cleaned_data['password2']  == form.cleaned_data['password1']:
+                if User.objects.filter(username=form.cleaned_data['username']).exists():
+                    form.add_error('username', '이미 사용중인 아이디 입니다.')
+                else:
+                    user = User.objects.create_user(
+                        username=form.cleaned_data['username'],
+                        password=form.cleaned_data['password1']
+                    )
+                    return HttpResponseRedirect('/')#회원가입 완료시 리다이렉트 되는 
+            else:
+                form.add_error('password2', '패스워드가 일치하지 않습니다.')
 
+
+    if request.method == 'GET':
+        form = RegistrationFrom()
+    
     return render(request,'registration/register.html' , context={'form':form} )
 
 
