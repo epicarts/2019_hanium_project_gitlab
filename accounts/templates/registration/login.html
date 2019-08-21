@@ -32,7 +32,9 @@
     <link rel="stylesheet" href="{% static "accounts/css/bootstrap.min.css" %}" media="screen">-->
 </head>
 <body>
-	
+	{% if form.errors %}
+    <p> 아이디, 비밀번호가 일치하지 않습니다. 다시 시도해주세요.</p>
+    {% endif %}
 	<div class="form-signin">
             <h2 class="form-signin-heading">로그인</h2>
         <div class="form-signin">

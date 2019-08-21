@@ -8,11 +8,10 @@ app_name='accounts'
 
 
 urlpatterns = [
-    #로그인 성공 시 => profile로 리다이텍트 됨 settings
-    path('login/', auth_views.LoginView.as_view(), name='login'),
+    # redirect_authenticated_user 로그인 되어 있으면 접근 불가...!!!
+    path('login/', auth_views.LoginView.as_view(redirect_authenticated_user=True), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('profile/', views.ProfileView.as_view(), name='profile'),
-    path('', views.hello),
     path('register/', views.RegisterView.as_view(), name='register'),
     path('password/change/', views.PasswordChange.as_view(), name='password_change'),
 

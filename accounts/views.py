@@ -21,18 +21,11 @@ class IndexView(View):
         print(request.user)
         return render(request, 'index.html', context=context)
 
-
-# Create your views here.
-def hello(request):
-    print(request)
-    return render(request, 'accounts/hello.html', {'title': 'hello accounts page', 'body': 'world'})
-
 class RegisterView(View):
     def get(self, request, *args, **kwargs):
         print('RegisterView access')
         form = RegistrationFrom()
         return render(request,'registration/register.html' , context={'form':form} )
-
 
     def post(self, request, *args, **kwargs):
         print('RegisterView access')
@@ -75,7 +68,6 @@ class PasswordChange(LoginRequiredMixin, View):
         2. 새 패스워드와 새 패스워드 확인이 같은지 검사
         3. 각각에 상황에 맡는 값을 message 에 담아서 리턴
         '''
-        context = {}
         form = PasswordChangeFrom(request.POST)
         if form.is_valid():# 폼형식이 맞으면,
             if check_password(form.cleaned_data['current_password'],request.user.password):
