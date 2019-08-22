@@ -30,11 +30,15 @@
     <![endif]-->
     <!--<link rel="stylesheet" href="{% static "accounts/css/login.css" %}" media="screen">
     <link rel="stylesheet" href="{% static "accounts/css/bootstrap.min.css" %}" media="screen">-->
+    <style>
+         
+    
+    </style>
 </head>
 <body>
 	
 	<div class="form-signin">
-            <h2 class="form-signin-heading">로그인</h2>
+            <h2 class="form-signin-heading">발표 너도 할수있어!</h2>
         <div class="form-signin">
             <form method="post" novalidate="" class="form-signin">
                     {% csrf_token %}
@@ -55,7 +59,7 @@
                       </div>
             <div class="form-signin">
                 <button class="btn btn-lg btn-primary btn-block" type="submit" value="submit">
-                    <span>이메일로 로그인</span>
+                    <span>로그인</span>
                 </button>
             </div>
         </form>
@@ -70,9 +74,8 @@
             <div class="sns_signup">
                 <div class="text_tit"><p>소셜 아이디로 간편 로그인</p></div>
                 <ul class="btn_wrapper">
-                    <li><button class="btn_def m naver" onclick="location.href='/googlelogin/google/login/' "><span><img alt="구글" height="18" src="{% static "accounts/img/login_google.png" %}" width="75"> 로그인</span></button></li>
-                    <li><button class="btn_def m facebook"><span><img alt="페이스북" height="21" src="{% static "/accounts/img/login_facebook.png" %}" width="102"> 로그인</span></button></li>
-                    <li><button class="btn_def m naver"><span><img alt="네이버" height="16" src="{% static "accounts/img/login_naver.png" %}" width="89"> 로그인</span></button></li>
+                    <li><button class="btn_def m " onclick="location.href='/googlelogin/google/login/' "><span><img alt="구글" height="18" src="{% static "accounts/img/login_google.png" %}" width="75"> 로그인</span></button></li>
+                    <li><button class="btn_def m "><span><img alt="네이버" height="16" src="{% static "accounts/img/login_naver.png" %}" width="89"> 로그인</span></button></li>
                 </ul>
             </div>
         </div>
