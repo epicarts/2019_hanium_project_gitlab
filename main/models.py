@@ -5,7 +5,7 @@ from django.conf import settings
 
 # Create your models here.
 class Room(models.Model):
-    author = models.CharField(max_length=30)#작성자 
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)#작성자 
     group = models.CharField(max_length=30)#소속
     roomname = models.CharField(max_length=100)#main 에 보여질 방 이름
     password = models.CharField(max_length=30,null=True)

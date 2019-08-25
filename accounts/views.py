@@ -44,6 +44,16 @@ class RegisterView(View):
                 form.add_error('password2', '패스워드가 일치하지 않습니다.')
         return render(request,'registration/register.html' , context={'form':form} )
 
+class RemoveUser(LoginRequiredMixin, View):
+    '''
+    회원탈퇴하는 페이지
+    '''
+    def get(self, request, *args, **kwargs):
+        return render(request, 'accounts/remove.html')
+    def post(self, request, *args, **kwargs):
+        request.user.delete()
+        return redirect('/')
+
 class ProfileView(LoginRequiredMixin, View):
     '''
     마이페이지(프로파일) 보는 페이지
