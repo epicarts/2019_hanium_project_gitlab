@@ -2,8 +2,12 @@ body {
     padding-top: 40px;
     padding-bottom: 40px;
     background-color: #eee;
+    
   }
-  
+
+  ul li{
+    list-style:none;
+    }
   .form-signin {
     max-width: 330px;
     padding: 15px;
@@ -62,6 +66,7 @@ body {
 .sns_signup .btn_def {
     border: 1px solid #ccc;
     margin-bottom: 14px;
+    margin-left: -40px;
     text-align: center;
     background: #fff;
     line-height: 55px;
@@ -88,4 +93,5 @@ text-align: center;
 }
 .btn_wrapper {
     text-align: center;
+    list-style:none;
 }
