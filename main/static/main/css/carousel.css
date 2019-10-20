@@ -133,10 +133,17 @@ body {
     }
   }
   
-
-  #chatdata{
+  #chattext{
     border: solid;
 	overFlow: auto;
+	max-height: 78px;
+  width: 45%;
+  height:78px;
+  }
+  #chatdata{
+    border: solid;
+  overFlow: scroll;
+  overFlow-y:scroll;
 	max-height: 500px;
   width: 45%;
   height:500px;

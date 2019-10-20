@@ -1,11 +1,21 @@
 {% extends "base.html" %}
 {% block title %}
-{{Room.roomname}}
+{{room.roomname}}
 {% endblock%}
 
 {% block content %}
 <div class="room_container">
+    <div style="float:right">
+        {% if perimssion_del %}
+        <!-- 방 삭제시 띄울 메시지  -->
+            <a href="{% url 'chat:room_delete' room_pk=room.pk %}" role="button" onclick="return confirm('정말 삭제하시겠습니까?')">방 삭제</a>
+        {% endif %}
+    </div>
+    
     <h2>유저 이름: {{user.username}}</h2>
+    
+    <h2>수강 제목: {{room.roomname}}</h2>
+    
     <div style="float:left">
         {% if room.uploadfile %}
             <iframe class="room_pdf" src="{{ room.uploadfile.url }}"></iframe>
@@ -19,9 +29,11 @@
                         
                       <tr>
                         
-                        <th>시간</th>
-                        <th>아이디</th>
-                        <th>메시지</th>
+                        <th>채팅</th>
+                        
+                        <th></th>
+                        
+                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -29,7 +41,9 @@
                         {% for message in messages %}
                         <tr>
                             <td>{{ message.formated_timestamp }}</td>
+                            
                             <td>{{ message.username }}</td>
+                            
                             <td>{{ message.message }}</td>
                         </tr> 
                         {% endfor %}
@@ -39,17 +53,15 @@
                 </table>
                 
             </div>
-    <div >
-    <input id="chat-message-input" type="text" size="40"/>
+            <div class="well" id="chattext">
+
+    <input id="chat-message-input" type="text" size="30"/>
     <input class="btn" id="chat-message-submit" type="button" value="Send"/>
 </div>
 </div>
     
     
-    {% if perimssion_del %}
-    <!-- 방 삭제시 띄울 메시지  -->
-        <a href="{% url 'chat:room_delete' room_pk=room.pk %}" role="button" onclick="return confirm('정말 삭제하시겠습니까?')">방 삭제</a>
-    {% endif %}
+   
 </div>
 </body>
 <script>

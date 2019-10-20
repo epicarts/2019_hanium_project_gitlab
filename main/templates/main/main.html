@@ -10,6 +10,7 @@
 <!-- 방 접근시 실패하면 띄울 메시지  -->
 {% if messages %}
     {% for message in messages %}
+    
         <script>
             function getCookie(name) {
                 var cookieValue = null;
@@ -68,9 +69,9 @@
         <thead>
         <tr>
             <td><B>소속</B></td>
-            <td><B>방제목</B></td>
+            <td><B>수강 제목</B></td>
             <td><B>작성자</B></td>
-            <td><B>방패스워드 입력</B></td>
+            <td><B>방 입장하기</B></td>
         </tr>
         </thead>
         <tbody>
@@ -79,7 +80,7 @@
             <td>{{Room.group}}</td>
             <td>{{Room.roomname}}</td>
             <td>{{Room.author}}</td>
-            <td><button class="btn" onclick="location.href='{% url 'chat:room_detail' Room.pk %}' ">방 입장하기 {{ Room.pk }}</button><td>
+            <td><button class="btn" onclick="location.href='{% url 'chat:room_detail' Room.pk %}' ">방 입장하기 </button><td>
         </tr>
         {% endfor %}
         <tbody>

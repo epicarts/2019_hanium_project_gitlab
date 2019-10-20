@@ -58,6 +58,7 @@ def room(request, room_pk):
         #퍼미션을 가지고 있다면 정상적으로 페이지를 보여줌
         if request.user.has_perm(perimssion_codename):
             room = Room.objects.get(pk=room_pk)
+            print("tesdfsdf", room.roomname)
             room_messages = reversed(room.messages.order_by('-timestamp')[:5])
             
             perimssion_codename_del = 'main.room_'+ str(room_pk) +'_delete'

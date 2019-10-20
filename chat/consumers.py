@@ -76,5 +76,5 @@ class ChatConsumer(AsyncWebsocketConsumer):
         await self.send(text_data=json.dumps({
             'message': message,
             'username': username,
-            'timestamp': timestamp.strftime('%Y년 %m월 %d일 %H:%M'),
+            'timestamp': timestamp.strftime('%H:%M'),
         }))

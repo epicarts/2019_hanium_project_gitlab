@@ -69,3 +69,8 @@ def createMain(request):
     if request.method == 'GET': # GET일 경우 form을 상속받아서, createMain.html로 전달
         form = CreateMain()
         return render(request,'main/createMain.html',{"form":form})
+
+        def page_not_found_page(request):
+            response= render_to_response('404.html')
+            response.status_code=404
+            return response
