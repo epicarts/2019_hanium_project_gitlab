@@ -6,3 +6,4 @@ cryptography
 channels_redis
 django-allauth
 Pillow
+boto3

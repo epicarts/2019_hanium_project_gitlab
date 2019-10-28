@@ -5,6 +5,7 @@ from .models import Room, Message
 from channels.db import database_sync_to_async
 from django.utils import timezone
 
+from . import tts
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
@@ -48,6 +49,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
         username = text_data_json['username']
+
+        tts.imboto(message, username)
+
 
         print("socket receive message: ", message)
         print("socket receive username: ", username)

@@ -4,6 +4,8 @@
 {% endblock%}
 
 {% block content %}
+
+
 <div class="room_container">
     <h2>유저 이름: {{user.username}}</h2>
     <div style="float:left">
@@ -42,6 +44,10 @@
     <div >
     <input id="chat-message-input" type="text" size="40"/>
     <input class="btn" id="chat-message-submit" type="button" value="Send"/>
+    <input id="" class="btn" id="chat-message-submit" type="button" value="play"/>
+    <input type="button" onClick="audio.play();" value="PLAY"/>
+
+
 </div>
 </div>
     
@@ -53,6 +59,13 @@
 </div>
 </body>
 <script>
+    // Audio 객체생성 ②
+    var audio = new Audio();
+    var username_mp3 = "/upload_files/" + "{{user.username}}" + ".mp3";
+    //audio.src = "/upload_files/speech.mp3";
+    audio.src =  username_mp3;
+
+
 
     var roomName = "{{ room.pk }}";//{{ room_name_json }};
 
