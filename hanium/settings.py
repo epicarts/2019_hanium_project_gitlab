@@ -23,9 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'wufom@f%xvy^36wu=uw)z6&%5xfc$2l=oa6*@)hv2*_bc!ba8d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DJANGO_DEBUG')
+DEBUG = os.getenv('DJANGO_DEBUG') == 'False'
 #DEBUG = False
-
 ALLOWED_HOSTS = ['*']
 
 
@@ -155,7 +154,7 @@ LOGOUT_REDIRECT_URL = '/accounts/login'
 #media file에 접근하는 URL
 MEDIA_URL = '/upload_files/'
 
-#실제 팡리이 위치하는 서버 내부 경로
+#실제 파일이 위치하는 서버 내부 경로
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 # 채팅 Channels

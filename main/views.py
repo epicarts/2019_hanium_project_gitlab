@@ -16,6 +16,9 @@ from django import template
 
 from django.contrib import messages
 
+from django.shortcuts import render_to_response,render,redirect
+from django.template import RequestContext
+
 # Create your views here.
 @login_required
 def main(request):
@@ -74,3 +77,10 @@ def createMain(request):
             response= render_to_response('404.html')
             response.status_code=404
             return response
+
+
+
+def page_not_found(request):
+    response=render_to_response('hanium/404.html',{},context_instance=RequestContext(request))
+    response.status_code=404
+    return response

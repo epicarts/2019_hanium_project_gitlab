@@ -14,3 +14,7 @@ urlpatterns = [
     path('createMain/',views.createMain,name='createMain'),
 #    path('imroom/',views.imroom,name='imroom'),
 ]
+
+#from django.conf.urls import(handler404)
+
+#handler404='django.views.page_not_found'
