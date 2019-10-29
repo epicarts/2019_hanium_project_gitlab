@@ -3,3 +3,4 @@ __pycache__/
 migrations/
 main/__init__.py
 uploads/
+model/

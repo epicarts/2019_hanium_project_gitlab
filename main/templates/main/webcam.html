@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}
+webcam
+{% endblock%}
+
+{% block content %}
+<br>
+
+<div>
+    <textarea id="chat-log" cols="100" rows="5"></textarea><br/>   
+    <video id="player" controls autoplay></video>
+    <button id="capture">Capture</button>
+    <canvas id="snapshot" width=150 height=150></canvas>
+
+</div>
+
+<script>
+            function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = jQuery.trim(cookies[i]);
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+            function newDoc(url_link) {
+                window.location.assign(url_link)
+            }
+            var csrftoken = getCookie('csrftoken');
+</script>
+
+<script>
+    var player = document.getElementById('player'); 
+    var snapshotCanvas = document.getElementById('snapshot'); //스냅샷 캔버스
+    var captureButton = document.getElementById('capture');
+    var handleSuccess = function(stream) {
+      // Attach the video stream to the video element and autoplay.
+      player.srcObject = stream;
+    };
+  
+    captureButton.addEventListener('click', function() {//클릭이 들어오면,,
+      var context = snapshot.getContext('2d');
+      context.drawImage(player, 0, 0, snapshotCanvas.width, snapshotCanvas.height);
+
+      var canvas = document.getElementById("snapshot");
+      var img = canvas.toDataURL('image/jpeg'); 
+      //console.log(img);
+
+      $.post({
+          url: '/webcam/',
+          dataType:"json",
+          contentType: "application/x-www-form-urlencoded; charset=utf-8",
+          data: {'csrfmiddlewaretoken': csrftoken, "imgBase64": img},
+          error: function(request, status, error) {},
+          success: function(data) {
+            document.querySelector('#chat-log').value += (data['message'] + '\n');//화면에 출력
+            //alert(data['message']);
+            //url =  '/webcam/';
+            //window.location = url;
+            return;
+          },
+      });
+    });
+
+    navigator.mediaDevices.getUserMedia({video: true})
+        .then(handleSuccess);
+  </script>
+{% endblock%}
