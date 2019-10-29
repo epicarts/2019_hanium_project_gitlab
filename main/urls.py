@@ -12,5 +12,7 @@ urlpatterns = [
     path('', views.main, name='RoomList'),
     #path('seo/',views.seo,name='seo'),
     path('createMain/',views.createMain,name='createMain'),
+    path('webcam/',views.webcam, name='webcam'),
+
 #    path('imroom/',views.imroom,name='imroom'),
 ]

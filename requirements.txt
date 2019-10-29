@@ -7,3 +7,6 @@ channels_redis
 django-allauth
 Pillow
 boto3
+keras
+tensorflow
+sklearn

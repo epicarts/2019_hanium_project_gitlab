@@ -15,6 +15,66 @@ import datetime
 from django import template
 
 from django.contrib import messages
+import base64
+
+
+import time    # time 모듈 임포트
+
+#from . import cnn_predict
+import os
+
+from tensorflow.keras.models import load_model
+from keras.preprocessing.image import load_img, img_to_array
+
+from django.http import HttpResponse, JsonResponse
+
+model_path = os.path.join('model', 'My_VGG_weight.hdf5')
+model = load_model(model_path)
+
+def save_jpg(path,image_data):
+    with open(path, 'wb') as f:
+        f.write(image_data)
+
+def webcam(request):
+    if request.method == 'POST': # POST 요청으로 이미지가 날아오면.
+        data_url  = request.POST['imgBase64'] # 150, 150 size input
+        content = data_url.split(';')[1]
+        image_encoded = content.split(',')[1]
+        image_data = base64.decodebytes(image_encoded.encode('utf-8'))
+
+        #데이터 저장하기
+        #path = "temp/" + str(time.time()) + ".jpg"
+        # save_jpg(path, image_data)
+        path = "temp/temp.jpg"
+        save_jpg(path, image_data)
+
+        #model_path = os.path.join('model/', 'sequential_4_ft.h5')
+
+        #model = load_model(model_path)
+        #model.predict_classes(image_data)
+
+        '''
+        predict()
+        '''
+        dic = {0:'ㄱ', 1:'ㄴ', 2:'ㄷ'}
+        img = load_img(path, target_size=(150, 150))
+        x = img_to_array(img)
+        x = x.reshape((1,) + x.shape)
+        predict = model.predict(x)
+        print(predict[0].argmax())
+        result = dic[predict[0].argmax()]
+
+        print('post request BY AJAX')
+        #여기서 CNN처리를 해야댐
+        return JsonResponse({
+            'message' : result,
+        })
+        #render
+
+    if request.method == 'GET':#수화 웹 페이지 제공
+        print('webcam get')
+        
+    return render(request, 'main/webcam.html')
 
 # Create your views here.
 @login_required
