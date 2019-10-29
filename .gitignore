@@ -2,5 +2,4 @@ __pycache__/
 *.py[cod]
 migrations/
 main/__init__.py
-uploads/
 model/

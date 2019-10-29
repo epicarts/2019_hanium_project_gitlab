@@ -52,7 +52,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         tts.imboto(message, username)
 
-
         print("socket receive message: ", message)
         print("socket receive username: ", username)
         
