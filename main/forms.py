@@ -16,3 +16,4 @@ class CreateMain(forms.ModelForm):
             'password' : forms.PasswordInput(),
             
         }
+        
