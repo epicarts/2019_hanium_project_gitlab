@@ -50,7 +50,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         message = text_data_json['message']
         username = text_data_json['username']
 
-        tts.imboto(message, username)
+        #tts.imboto(message, username)
 
         print("socket receive message: ", message)
         print("socket receive username: ", username)
