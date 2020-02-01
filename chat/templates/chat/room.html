@@ -1,45 +1,85 @@
-<!-- chat/templates/chat/room.html -->
-<!DOCTYPE html>
-{% load static %}
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title>Chat Room</title>
-</head>
+{% extends "base.html" %}
+{% block title %}
+{{room.roomname}}
+{% endblock%}
 
-<body>
-    <h1>{{ room.label }}</h1>
-    <h2>현재 접속한 유저 이름: {{user.username}}</h2>
+{% block content %}
 
-    <textarea id="chat-log" cols="100" rows="20">
-    </textarea><br/>
-    <input id="chat-message-input" type="text" size="100"/><br/>
-    <input id="chat-message-submit" type="button" value="Send"/>
 
-    <form id="chatform">
-        <table id="chat">
-        <!-- 데이터 베이스로 넘겨받은 값을 반복 -->
-            <tbody>  
-                {% for message in messages %}
-                <tr>
-                    <td>{{ message.timestamp }}</td>
-                    <td>{{ message.username }}</td>
-                    <td>{{ message.message }}</td>
-                </tr> 
-                {% endfor %}
-            </tbody>
-            <tfoot>
-            <tr>
-                <td>Say something:</td>
-                <td colspan=2>
-            </td>
-            </tfoot>
-        </table>
-    </form>
+<div class="room_container">
+    <div style="float:right">
+        {% if perimssion_del %}
+        <!-- 방 삭제시 띄울 메시지  -->
+            <a href="{% url 'chat:room_delete' room_pk=room.pk %}" role="button" onclick="return confirm('정말 삭제하시겠습니까?')">방 삭제</a>
+        {% endif %}
+    </div>
+    
+    <h2>유저 이름: {{user.username}}</h2>
+    
+    <h2>수강 제목: {{room.roomname}}</h2>
+    
+    <div style="float:left">
+        {% if room.uploadfile %}
+            <iframe class="room_pdf" src="{{ room.uploadfile.url }}"></iframe>
+        {% endif %}
+    </div>
+    <div>
+    <div class="well" id="chatdata">
+            <table class="u-full-width" id="result">
+        
+                    <thead>
+                        
+                      <tr>
+                        
+                        <th>채팅</th>
+                        
+                        <th></th>
+                        
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                     
+                        {% for message in messages %}
+                        <tr>
+                            <td>{{ message.formated_timestamp }}</td>
+                            
+                            <td>{{ message.username }}</td>
+                            
+                            <td>{{ message.message }}</td>
+                        </tr> 
+                        {% endfor %}
+                    </tbody>
+                    <tbody id="bodytable">     
+                    </tbody>
+                </table>
+                
+            </div>
+            <div class="well" id="chattext">
+
+    <input id="chat-message-input" type="text" size="30"/>
+    <input class="btn" id="chat-message-submit" type="button" value="Send"/>
+    <input id="" class="btn" id="chat-message-submit" type="button" value="play"/>
+    <input type="button" onClick="audio.play();" value="PLAY"/>
+
+
+</div>
+</div>
+    
+    
+   
+</div>
 </body>
 <script>
+    // Audio 객체생성 ②
+    var audio = new Audio();
+    var username_mp3 = "/upload_files/" + "{{user.username}}" + ".mp3";
+    //audio.src = "/upload_files/speech.mp3";
+    audio.src =  username_mp3;
 
-    var roomName = "{{ room.label }}";//{{ room_name_json }};
+
+
+    var roomName = "{{ room.pk }}";//{{ room_name_json }};
 
     var chatSocket = new WebSocket(
         'ws://' + window.location.host +
@@ -47,10 +87,33 @@
 
     // onmessage는 counsumers => 데이터를 뿌림 => 데이터를 받고 화면에 출력 
     chatSocket.onmessage = function(e) {
+        console.log(e);
         var data = JSON.parse(e.data);//데이터를 받음.
-        var message = data['message'];//필요한 데이터 추출
-        var username = data['username']
-        document.querySelector('#chat-log').value += (message + '\n');//화면에 출력
+
+        listContainer = document.getElementById('bodytable');
+        list = document.createElement('tr');
+        listItem1 = document.createElement('td');
+        listItem2 = document.createElement('td');
+        listItem3 = document.createElement('td');
+        
+        listItem1.textContent = data['timestamp'];
+        listItem2.textContent = data['username'];
+        listItem3.textContent = data['message'];
+
+        list.appendChild(listItem1);
+        list.appendChild(listItem2);
+        list.appendChild(listItem3);
+
+        listContainer.appendChild(list);
+
+
+
+        //$('#bodytable').append(html);
+
+
+        //document.querySelector('#chat-log').value += (username + message + timestamp + '\n');//화면에 출력
+
+
     };
 
     chatSocket.onclose = function(e) {
@@ -75,5 +138,7 @@
 
         messageInputDom.value = '';
     };
+    var divdiv = document.getElementById("scrollDiv");
+    divdiv.scrollTop = divdiv.scrollHeight;
 </script>
-</html>
+{% endblock%}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+{% load static %}
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static "main/css/carousel.css" %}" media="screen">
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- 방생성 관련 script -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link href="{% static "accounts/css/signin.css" %}" rel="stylesheet">
+    <style>
+      body,html{
+          margin:0;
+          padding:0;
+          height:100%;
+ }
+ .bgimg{
+     border:0;
+     padding:0;
+     background-image:url('{% static "main/img/study.jpeg" %}');
+     opacity: 0.5;
+     min-height:100%;
+     background-position: center;
+     background-size: cover;
+ }
+ 
+ </style>
+  </head>
+<body>
+    <div class="bgimg">
+    </div>
+        <div class="navbar-wrapper">
+                <div class="container">
+          
+                  <nav class="navbar navbar-inverse navbar-static-top">
+                    <div class="container">
+                      <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                          <span class="sr-only">Toggle navigation</span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">Helproject</a>
+                      </div>
+                      <div id="navbar" class="navbar-collapse collapse pull-right">
+                        <ul class="nav navbar-nav">
+                          <li><a href="/webcam">수화</a></li>
+                          
+                          
+                          <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{user.username}} <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                              <li><a href="#">알림</a></li>
+                              <li><a href="/accounts/password/change">비밀번호변경</a></li>
+                              <li><a href="/accounts/remove/">회원탈퇴</a></li>
+                              <li class="divider"></li>
+                              <li><a href="/accounts/logout/">로그아웃</a></li>
+                              
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </nav>
+          
+                
+              
+              {% block content %}
+              {% endblock %}
+            </div>
+            
+             <!-- FOOTER 
+      <footer>
+          <p class="container">&copy; 제작자: 최영호 박서희 정병록 &middot; </p>
+        </footer>-->
+      </div>
+      </body>
+      </html>

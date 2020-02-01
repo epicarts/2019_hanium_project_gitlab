@@ -1,16 +1,21 @@
-{#profile.html#}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Profile</title>
-</head>
-<body>
-{{ data.is_authenticated }}
-<ul>
-    {% for key,value in data.items %}
-        {{ key }} : {{ value }}<br>
-    {% endfor %}
-</ul>
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}
+profile
+{% endblock%}
+
+{% block content %}
+    <body>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <ul>회원 기본 정보</ul>
+    <ul>마지막 로그인 : {{data.last_login}}</ul>
+    <ul>아이디 : {{data.username}}</ul>
+    <ul>이메일 인증</ul>
+    <button class="btn" onclick="location.href='{% url 'accounts:password_change' %}' ">패스워드 변경하기 </button>
+    <button class="btn" onclick="location.href='{% url 'accounts:remove_user' %}' ">회원 탈퇴하기 </button>
+
+    </body>
+{% endblock%}

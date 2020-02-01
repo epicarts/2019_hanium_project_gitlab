@@ -1,25 +1,47 @@
 # 2019_hanium_project
+> https://lab.hanium.or.kr/19-p268/2019_hanium_project
+> 
 - docker-compose (gunicorn + Django + nginx + mariadb)
 
-#### compose folder
+### 간단한 동작영상
+https://youtu.be/0NGcogvlrlM
+
+
+
+## 1. 기능
+
+### 채팅
+- channel을 이용하여 통신
+- django 권한을 이용하여, 각 방마다 접근 권한 부여
+
+### TTS
+- AWS의 boto3를 사용하여, 채팅시 TTS 구현. 
+- 현재 계정 연결이 되어있지 않아 해당 이벤트 부분이 비활성화(주석처리) 되어 있다.
+
+### 쇼설로그인
+- 로컬에서 로그인 불가
+
+## 2. 파일 및 폴더 설명
+
+#### 2.1 compose folder
 - /django: 디장고 도커파일(Dockerfile)
 - /nginx: nginx 설정 파일
 
-#### hanium folder
+#### 2.2 hanium folder
 - 디장고 프로젝트 패키지
 
-#### chat folder
+#### 2.3 chat folder
 - django chat app: 디장고 채팅 관련 앱
 
-#### accounts folder
+#### 2.4 accounts folder
 - django accounts app: 디장고 로그인 관련 앱
 
-#### docke-compose.yml
+#### 2.5 docke-compose.yml
 - django
 - mariadb
 - ngninx
 
-#### requirements.txt
+#### 2.6 requirements.txt
 - django의 python 패키지 설치 모음
 
 # 도커 설치 및 적용 문서(Ubuntu)

@@ -1,0 +1,97 @@
+
+        {% extends "base.html" %}
+        {% block title %}
+        list
+        {% endblock%}
+
+        {% block content %}
+        <br>
+        
+<!-- 방 접근시 실패하면 띄울 메시지  -->
+{% if messages %}
+    {% for message in messages %}
+    
+        <script>
+            function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = jQuery.trim(cookies[i]);
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+            function newDoc(url_link) {
+                window.location.assign(url_link)
+            }
+            var csrftoken = getCookie('csrftoken');
+
+            var roompk = '{{message}}'
+            var returnValue=prompt('패스워드를 입력해 주세요');
+            if(returnValue){
+                $.post({
+                    url: 'room/'+roompk+'/',
+                    dataType:"json",
+                    data: {'csrfmiddlewaretoken': csrftoken, password: returnValue},
+                    error: function(request, status, error) {
+                        //console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                    },
+                    success: function(data) {
+                        //console.log('success');
+                        alert(data['message']);
+                        url =  '/room/'+roompk+'/';
+                        window.location = url;
+                        return;
+                    },
+                });
+            }
+            else{
+                if (returnValue == null){
+                    alert("패스워드 입력을 취소 했습니다.");
+                }
+                else{
+                    alert("패스워드 입력이 없습니다.");
+                }
+            }
+        </script>
+    {% endfor %}
+{% endif %}
+
+<!-- 방리스트 하기-->
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <td><B>소속</B></td>
+            <td><B>수강 제목</B></td>
+            <td><B>작성자</B></td>
+            <td><B>방 입장하기</B></td>
+        </tr>
+        </thead>
+        <tbody>
+          {% for Room in RoomList %}
+        <tr>
+            <td>{{Room.group}}</td>
+            <td>{{Room.roomname}}</td>
+            <td>{{Room.author}}</td>
+            <td><button class="btn" onclick="location.href='{% url 'chat:room_detail' Room.pk %}' ">방 입장하기 </button><td>
+        </tr>
+        {% endfor %}
+        <tbody>
+    </table>
+</div>
+<div class="container">
+<!-- 방생성 하기-->
+<button class="btn btn-default pull-right" onclick="location.href='{% url 'main:createMain' %}' "> 방생성</button>
+
+</div>
+
+            
+             
+    {% endblock%}

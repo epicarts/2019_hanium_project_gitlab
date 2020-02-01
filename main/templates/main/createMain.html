@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}
+방생성하기
+{% endblock%}
+
+{% block content %}
+<br>
+
+<!-- 입력 실패시 띄울 메시지  -->
+{% if messages %}
+    {% for message in messages %}
+      {% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+        <script>
+          alert('{{message}}')
+        </script>
+      {% endif %}
+    {% endfor %}
+{% endif %}
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{form.as_p}}
+      <input class="btn"type="submit" value="방생성">
+      <input class="btn" type="button" value="취소" onclick="location.href='/'"/>
+      </form>
+{% endblock%}

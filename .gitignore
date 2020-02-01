@@ -1,3 +1,5 @@
 __pycache__/
 *.py[cod]
 migrations/
+main/__init__.py
+My_VGG_*

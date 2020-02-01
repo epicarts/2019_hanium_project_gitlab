@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}
+회원탈퇴
+{% endblock%}
+
+{% block content %}
+    
+    <br>
+
+    <ul><h2>회원 탈퇴 페이지</h2></ul>
+    <ul>
+    <form method="POST">
+        {% csrf_token %}
+        <p>정말로 탈퇴하시겠습니까?</p>
+        <input class="btn" type="submit" value="탈퇴"/>
+        <input class="btn" type="button" value="취소" onclick="location.href='/'"/>
+    </form>
+</ul>
+{% endblock%}

@@ -1,6 +1,12 @@
-Django==2.2.2
+Django==2.2.3
 mysqlclient==1.4.2
 gunicorn
 channels
 cryptography
 channels_redis
+django-allauth
+Pillow
+boto3
+keras
+tensorflow
+sklearn

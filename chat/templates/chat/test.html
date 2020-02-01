@@ -1,0 +1,24 @@
+<html>
+<head>
+<title>:: JAVASCRIPT 음악 재생 ::</title>
+<script type="text/javascript">
+
+    // Audio 객체생성 ①
+    // var audio = new Audio('./lucky.mp3');
+
+    // Audio 객체생성 ②
+    var audio = new Audio();
+    audio.src = "/upload_files/speech.mp3";
+    var path = window.location.pathname;
+    console.log(path);
+
+
+</script>
+</head>
+<body>
+    <input type="button" onClick="audio.play();" value="PLAY"/>
+    <input type="button" onClick="audio.pause();" value="PAUSE"/>
+    <input type="number" onChange="audio.currentTime=this.value"/>
+    <input type="number" onChange="audio.volume=this.value"/>
+</body>
+</html>
