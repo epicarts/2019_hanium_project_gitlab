@@ -4,11 +4,15 @@ from .models import Room
 class CreateMain(forms.ModelForm):
     #일반 폼
     confirm_password = forms.CharField(label = '비밀번호 확인', widget=forms.PasswordInput())
-
+    password = forms.CharField(label = '비밀번호', widget=forms.PasswordInput())
+   
     #모델 폼
     class Meta:
         model=Room
         fields = ['group', 'roomname','password','confirm_password','uploadfile'] 
         widgets = {
+            'confirm_password' : forms.PasswordInput(),
+            
             'password' : forms.PasswordInput(),
+            
         }

@@ -12,9 +12,9 @@ class Message(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True,db_index=True)
 
     def formated_timestamp(self):
-        return self.timestamp.strftime('%Y년 %m월 %d일 %H:%M')
+        return self.timestamp.strftime('%H:%M')
 
-
+    
     # def __unicode__(self):
     #     return '[{timestamp}] {username}:{message}'.format(**self.as_dict())
 

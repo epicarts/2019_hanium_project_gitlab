@@ -24,6 +24,7 @@ SECRET_KEY = 'wufom@f%xvy^36wu=uw)z6&%5xfc$2l=oa6*@)hv2*_bc!ba8d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DJANGO_DEBUG')
+#DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
